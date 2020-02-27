@@ -19,7 +19,10 @@ public class UserDAO implements IUserDAO {
     @Override
     public void updateUser(UserDTO user) {
         UserDTO tempUser = user;
-        
+        userHMap.remove(user.getId());
+
+        //TODO needs a lot more work before its finished
+        userHMap.put(tempUser.getId(),tempUser);
     }
 
     @Override
