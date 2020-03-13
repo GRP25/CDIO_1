@@ -11,8 +11,4 @@ public class DALException extends Exception {
         super(message, cause);
     }
 
-    public DALException(int id) {
-        super("Id nr: " + id + " findes allerede.");
-
-    }
 }
