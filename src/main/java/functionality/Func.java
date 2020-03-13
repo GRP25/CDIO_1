@@ -12,7 +12,6 @@ import java.util.List;
 public class Func {
 
     IUserDAO data;
-    ArrayList<String> storeCpr = new ArrayList<>( );
 
     public Func(int database) {
         if (database == 1) {
@@ -60,8 +59,6 @@ public class Func {
     }
 
     public void createUser(String name, String initials, String password, ArrayList<String> roles, String cpr) throws DALException {
-        if (!userAlreadyExists( cpr )){
-            storeCpr.add( cpr );
 
             int id = this.data.getUserList().size() + 1;
             long cprNR = Long.parseLong(cpr);
@@ -69,9 +66,7 @@ public class Func {
             UserDTO user = new UserDTO(name, initials, password, roles, id, cprNR);
 
             this.data.createUser(user);
-        }else {
-            throw new DALException( "CPR-nr: " + cpr + " already exists." );
-        }
+
     }
 
     public UserDTO getUser(int userID) throws DALException {
@@ -83,10 +78,4 @@ public class Func {
         return this.data.getUserList();
     }
 
-    public boolean userAlreadyExists(String cpr){
-        for (String s : this.storeCpr)
-            if (s.equals( cpr ))
-                return true;
-        return false;
-    }
 }
